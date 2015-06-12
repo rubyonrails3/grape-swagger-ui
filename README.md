@@ -14,6 +14,19 @@ and run
 
 	bundle install
 	
+Next you need to mount in your *config/routes.rb* file
+
+	Rails.application.routes.draw do
+	  mount  GrapeSwaggerUi::Engine => '/apidoc'
+	end
+	
+if your api is on **/api/grapw_swagger** then you should be good else you would need to add path in configuration file.
+
+	GrapeSwaggerUi.url = '/api/swagger_doc.json'
+
+
+
+	
 	
 ## Configurations
 
