@@ -1,14 +1,55 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>GrapeSwaggerUi</title>
-  <%= stylesheet_link_tag    "grape_swagger_ui/application", media: "all" %>
-  <%= javascript_include_tag "grape_swagger_ui/application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>GrapeSwaggerUi</title>
+    <%= stylesheet_link_tag    "grape_swagger_ui/application", media: "all" %>
+    <%= javascript_include_tag "grape_swagger_ui/application" %>
+    <%= csrf_meta_tags %>
 
-<%= yield %>
+    <script type="text/javascript">
+$(function () {
+  window.swaggerUi = new SwaggerUi({
+    url: '<%= GrapeSwaggerUi.url %>',
+    dom_id: '<%= GrapeSwaggerUi.dom_id %>',
+    supportedSubmitMethods: <%= GrapeSwaggerUi.supported_submit_methods.to_json.html_safe %>,
+    onComplete: function(swaggerApi, swaggerUi){
+      log("Loaded SwaggerUI");
 
-</body>
+      if(typeof initOAuth == "function") {
+        /*
+           initOAuth({
+           clientId: "your-client-id",
+           realm: "your-realms",
+           appName: "your-app-name"
+           });
+         */
+      }
+      $('pre code').each(function(i, e) {
+        hljs.highlightBlock(e)
+      });
+    },
+    onFailure: function(data) {
+      log("Unable to Load SwaggerUI");
+    },
+    docExpansion: '<%= GrapeSwaggerUi.doc_expansion %>',
+    sorter : '<%= GrapeSwaggerUi.sorter %>'
+  });
+
+  $('#input_apiKey').change(function() {
+    var key = $('#input_apiKey')[0].value;
+    log("key: " + key);
+    if(key && key.trim() != "") {
+      log("added key " + key);
+      window.authorizations.add("key", new ApiKeyAuthorization("api_key", key, "query"));
+    }
+  })
+  window.swaggerUi.load();
+});
+    </script>
+  </head>
+
+  <body class="swagger-section">
+    <%= yield %>
+  </body>
 </html>
+

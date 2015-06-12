@@ -10,4 +10,15 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require_tree .
+//= require grape_swagger_ui/shred.bundle
+//= require grape_swagger_ui/jquery-1.8.0.min
+//= require grape_swagger_ui/jquery.slideto.min
+//= require grape_swagger_ui/jquery.wiggle.min
+//= require grape_swagger_ui/jquery.ba-bbq.min
+//= require grape_swagger_ui/handlebars-1.0.0
+//= require grape_swagger_ui/underscore-min
+//= require grape_swagger_ui/backbone-min
+//= require grape_swagger_ui/swagger
+//= require grape_swagger_ui/swagger-ui
+//= require grape_swagger_ui/highlight.7.3.pack
+//= require grape_swagger_ui/swagger-oauth
